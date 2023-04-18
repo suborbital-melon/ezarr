@@ -16,14 +16,16 @@ class UserGroupSetup:
     def sonarr(self):
         os.system(
             '/bin/bash -c "sudo useradd sonarr -u 13001'
-            " ; sudo mkdir -pv " + self.root_dir + "/data/{media,torrents}/tv -m 775"
+            " ; sudo mkdir -pv "
+            + self.root_dir
+            + "/data/{media,torrents,usenet/complete}/tv -m 775"
             " ; sudo chown -R sonarr:mediacenter "
             + self.root_dir
-            + "/data/{media,torrents}/tv"
+            + "/data/{media,torrents,usenet/complete}/tv"
             " ; sudo chown $(id -u):mediacenter " + self.root_dir + "/data"
             " ; sudo chown $(id -u):mediacenter "
             + self.root_dir
-            + '/data/{media,torrents}"'
+            + '/data/{media,torrents,usenet/complete}"'
         )
         self.create_config_dir("sonarr")
         os.system("sudo usermod -a -G mediacenter sonarr")
@@ -33,14 +35,14 @@ class UserGroupSetup:
             '/bin/bash -c "sudo useradd radarr -u 13002'
             " ; sudo mkdir -pv "
             + self.root_dir
-            + "/data/{media,torrents}/movies -m 775"
+            + "/data/{media,torrents,usenet/complete}/movies -m 775"
             " ; sudo chown -R radarr:mediacenter "
             + self.root_dir
-            + "/data/{media,torrents}/movies"
+            + "/data/{media,torrents,usenet/complete}/movies"
             " ; sudo chown $(id -u):mediacenter " + self.root_dir + "/data"
             " ; sudo chown $(id -u):mediacenter "
             + self.root_dir
-            + '/data/{media,torrents}"'
+            + '/data/{media,torrents,usenet/complete}"'
         )
         self.create_config_dir("radarr")
         os.system("sudo usermod -a -G mediacenter radarr")
@@ -48,14 +50,16 @@ class UserGroupSetup:
     def lidarr(self):
         os.system(
             '/bin/bash -c "sudo useradd lidarr -u 13003'
-            " ; sudo mkdir -pv " + self.root_dir + "/data/{media,torrents}/music -m 775"
+            " ; sudo mkdir -pv "
+            + self.root_dir
+            + "/data/{media,torrents,usenet/complete}/music -m 775"
             " ; sudo chown -R lidarr:mediacenter "
             + self.root_dir
-            + "/data/{media,torrents}/music"
+            + "/data/{media,torrents,usenet/complete}/music"
             " ; sudo chown $(id -u):mediacenter " + self.root_dir + "/data"
             " ; sudo chown $(id -u):mediacenter "
             + self.root_dir
-            + '/data/{media,torrents}"'
+            + '/data/{media,torrents,usenet/complete}"'
         )
         self.create_config_dir("lidarr")
         os.system("sudo usermod -a -G mediacenter lidarr")
@@ -63,31 +67,38 @@ class UserGroupSetup:
     def readarr(self):
         os.system(
             '/bin/bash -c "sudo useradd readarr -u 13004'
-            " ; sudo mkdir -pv " + self.root_dir + "/data/{media,torrents}/books -m 775"
+            " ; sudo mkdir -pv "
+            + self.root_dir
+            + "/data/{media,torrents,usenet/complete}/books -m 775"
             " ; sudo chown -R readarr:mediacenter "
             + self.root_dir
-            + "/data/{media,torrents}/books"
+            + "/data/{media,torrents,usenet/complete}/books"
             " ; sudo chown $(id -u):mediacenter " + self.root_dir + "/data"
             " ; sudo chown $(id -u):mediacenter "
             + self.root_dir
-            + '/data/{media,torrents}"'
+            + '/data/{media,torrents,usenet/complete}"'
         )
         self.create_config_dir("readarr")
         os.system("sudo usermod -a -G mediacenter readarr")
+
+    def bazarr(self):
+        os.system('/bin/bash -c "sudo useradd bazarr -u 13012')
+        self.create_config_dir("bazarr")
+        os.system("sudo usermod -a -G mediacenter bazarr")
 
     def mylar3(self):
         os.system(
             '/bin/bash -c "sudo useradd mylar -u 13005'
             " ; sudo mkdir -pv "
             + self.root_dir
-            + "/data/{media,torrents}/comics -m 775"
+            + "/data/{media,torrents,usenet/complete}/comics -m 775"
             " ; sudo chown -R mylar:mediacenter "
             + self.root_dir
-            + "/data/{media,torrents}/comics"
+            + "/data/{media,torrents,usenet/complete}/comics"
             " ; sudo chown $(id -u):mediacenter " + self.root_dir + "/data"
             " ; sudo chown $(id -u):mediacenter "
             + self.root_dir
-            + '/data/{media,torrents}"'
+            + '/data/{media,torrents,usenet/complete}"'
         )
         self.create_config_dir("mylar")
         os.system("sudo usermod -a -G mediacenter mylar")
@@ -97,14 +108,14 @@ class UserGroupSetup:
             '/bin/bash -c "sudo useradd audiobookshelf -u 13009'
             " ; sudo mkdir -pv "
             + self.root_dir
-            + "/data/{media,torrents}/audiobooks -m 775"
+            + "/data/{media,torrents,usenet/complete}/audiobooks -m 775"
             " ; sudo chown -R audiobookshelf:mediacenter "
             + self.root_dir
-            + "/data/{media,torrents}/audiobooks"
+            + "/data/{media,torrents,usenet/complete}/audiobooks"
             " ; sudo chown $(id -u):mediacenter " + self.root_dir + "/data"
             " ; sudo chown $(id -u):mediacenter "
             + self.root_dir
-            + '/data/{media,torrents}"'
+            + '/data/{media,torrents,usenet/complete}"'
         )
         self.create_config_dir("audiobookshelf")
         os.system("sudo usermod -a -G mediacenter audiobookshelf")
@@ -118,7 +129,16 @@ class UserGroupSetup:
         os.system("sudo useradd qbittorrent -u 13007")
         os.system("sudo usermod -a -G mediacenter qbittorrent")
 
+    def sabnzbd(self):
+        os.system("sudo useradd sabnzbd -u 13011")
+        os.system("sudo usermod -a -G mediacenter sabnzbd")
+
     def overseerr(self):
         os.system("sudo useradd overseerr -u 13009")
         self.create_config_dir("overseerr")
         os.system("sudo usermod -a -G mediacenter overseerr")
+
+    def jellyseerr(self):
+        os.system("sudo useradd jellyseerr -u 13010")
+        self.create_config_dir("jellyseerr")
+        os.system("sudo usermod -a -G mediacenter jellyseerr")

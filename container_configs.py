@@ -15,6 +15,7 @@ class ContainerConfig:
         self.book_dir = root_dir + "/media/books"
         self.comic_dir = root_dir + "/media/comics"
         self.torrent_dir = root_dir + "/data/torrents"
+        self.usenet_dir = root_dir + "/data/usenet"
 
     def plex(self):
         return (
@@ -63,7 +64,7 @@ class ContainerConfig:
             "      - TZ=" + self.timezone + "\n"
             "    volumes:\n"
             "      - " + self.config_dir + "/jellyfin-config:/config\n"
-            "      - " + self.root_dir + "/data/media:/data\n"
+            "      - " + self.root_dir + "/data/media:/data/media\n"
             "    ports:\n"
             '      - "8096:8096"\n'
             "    restart: unless-stopped\n\n"
@@ -126,7 +127,7 @@ class ContainerConfig:
     def readarr(self):
         return (
             "  readarr:\n"
-            "    image: lscr.io/linuxserver/readarr:develop\n"
+            "    image: lscr.io/linuxserver/readarr:latest\n"
             "    container_name: readarr\n"
             "    environment:\n"
             "      - PUID=13004\n"
@@ -138,6 +139,24 @@ class ContainerConfig:
             "      - " + self.root_dir + "/data:/data\n"
             "    ports:\n"
             '      - "8787:8787"\n'
+            "    restart: unless-stopped\n\n"
+        )
+
+    def bazarr(self):
+        return (
+            "  bazarr:\n"
+            "    image: lscr.io/linuxserver/bazarr:latest\n"
+            "    container_name: bazarr\n"
+            "    environment:\n"
+            "      - PUID=13012\n"
+            "      - PGID=13000\n"
+            "      - UMASK=002\n"
+            "      - TZ=" + self.timezone + "\n"
+            "    volumes:\n"
+            "      - " + self.config_dir + "/bazarr-config:/config\n"
+            "      - " + self.root_dir + "/data/media:/data/media\n"
+            "    ports:\n"
+            '      - "6767:6767"\n'
             "    restart: unless-stopped\n\n"
         )
 
@@ -179,7 +198,7 @@ class ContainerConfig:
     def prowlarr(self):
         return (
             "  prowlarr:\n"
-            "    image: lscr.io/linuxserver/prowlarr:develop\n"
+            "    image: lscr.io/linuxserver/prowlarr:latest\n"
             "    container_name: prowlarr\n"
             "    environment:\n"
             "      - PUID=13006\n"
@@ -214,6 +233,25 @@ class ContainerConfig:
             "    restart: unless-stopped\n\n"
         )
 
+    def sabnzbd(self):
+        return (
+            "  sabnzbd:\n"
+            "    image: lscr.io/linuxserver/sabnzbd:latest\n"
+            "    container_name: sabnzbd\n"
+            "    environment:\n"
+            "      - PUID=13011\n"
+            "      - PGID=13000\n"
+            "      - UMASK=002\n"
+            "      - TZ=" + self.timezone + "\n"
+            "    volumes:\n"
+            "      - " + self.config_dir + "/sabnzbd-config:/config\n"
+            "      - " + self.usenet_dir + ":/data/usenet\n"
+            "    ports:\n"
+            '      - "8080:8080"\n'
+            '      - "9090:9090"\n'
+            "    restart: unless-stopped\n\n"
+        )
+
     def overseerr(self):
         return (
             "  overseerr:\n"
@@ -226,6 +264,23 @@ class ContainerConfig:
             "      - TZ=" + self.timezone + "\n"
             "    volumes:\n"
             "      - " + self.config_dir + "/overseerr-config:/app/config\n"
+            "    ports:\n"
+            '      - "5055:5055"\n'
+            "    restart: unless-stopped\n\n"
+        )
+
+    def jellyseerr(self):
+        return (
+            "  jellyseerr:\n"
+            "    image: fallenbagel/jellyseerr:latest\n"
+            "    container_name: jellyseerr\n"
+            "    environment:\n"
+            "      - PUID=13010\n"
+            "      - PGID=13000\n"
+            "      - UMASK=002\n"
+            "      - TZ=" + self.timezone + "\n"
+            "    volumes:\n"
+            "      - " + self.config_dir + "/jellyseerr-config:/app/config\n"
             "    ports:\n"
             '      - "5055:5055"\n'
             "    restart: unless-stopped\n\n"
