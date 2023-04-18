@@ -82,7 +82,7 @@ class UserGroupSetup:
         os.system("sudo usermod -a -G mediacenter readarr")
 
     def bazarr(self):
-        os.system('/bin/bash -c "sudo useradd bazarr -u 13012')
+        os.system("sudo useradd bazarr -u 13012")
         self.create_config_dir("bazarr")
         os.system("sudo usermod -a -G mediacenter bazarr")
 
