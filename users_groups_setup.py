@@ -142,3 +142,13 @@ class UserGroupSetup:
         os.system("sudo useradd jellyseerr -u 13010")
         self.create_config_dir("jellyseerr")
         os.system("sudo usermod -a -G mediacenter jellyseerr")
+
+    def jellyfin(self):
+        os.system(
+            '/bin/bash -c "sudo useradd jellyfin -u 1000'
+            " ; sudo chown -R jellyfin:mediacenter "
+            + self.root_dir
+            + "/data/media/{movies,tv,books,music}"
+        )
+        self.create_config_dir("jellyfin")
+        os.system("sudo usermod -a -G mediacenter jellyfin")
