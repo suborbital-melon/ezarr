@@ -127,7 +127,7 @@ class ContainerConfig:
     def readarr(self):
         return (
             "  readarr:\n"
-            "    image: lscr.io/linuxserver/readarr:latest\n"
+            "    image: lscr.io/linuxserver/readarr:develop\n"
             "    container_name: readarr\n"
             "    environment:\n"
             "      - PUID=13004\n"
@@ -198,7 +198,7 @@ class ContainerConfig:
     def prowlarr(self):
         return (
             "  prowlarr:\n"
-            "    image: lscr.io/linuxserver/prowlarr:latest\n"
+            "    image: lscr.io/linuxserver/prowlarr:develop\n"
             "    container_name: prowlarr\n"
             "    environment:\n"
             "      - PUID=13006\n"
@@ -245,7 +245,7 @@ class ContainerConfig:
             "      - TZ=" + self.timezone + "\n"
             "    volumes:\n"
             "      - " + self.config_dir + "/sabnzbd-config:/config\n"
-            "      - " + self.usenet_dir + ":/data/usenet\n"
+            "      - " + self.root_dir + ":/data\n"
             "    ports:\n"
             '      - "8080:8080"\n'
             '      - "9090:9090"\n'

@@ -1,0 +1,8 @@
+# Docker compose yaml
+docker-compose.yml
+
+# Python cache files
+*.pyc
+
+# Python virtual environment
+venv/

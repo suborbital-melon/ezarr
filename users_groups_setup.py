@@ -25,7 +25,7 @@ class UserGroupSetup:
             " ; sudo chown $(id -u):mediacenter " + self.root_dir + "/data"
             " ; sudo chown $(id -u):mediacenter "
             + self.root_dir
-            + '/data/{media,torrents,usenet/complete}"'
+            + '/data/{media,torrents,usenet}"'
         )
         self.create_config_dir("sonarr")
         os.system("sudo usermod -a -G mediacenter sonarr")
@@ -42,7 +42,7 @@ class UserGroupSetup:
             " ; sudo chown $(id -u):mediacenter " + self.root_dir + "/data"
             " ; sudo chown $(id -u):mediacenter "
             + self.root_dir
-            + '/data/{media,torrents,usenet/complete}"'
+            + '/data/{media,torrents,usenet}"'
         )
         self.create_config_dir("radarr")
         os.system("sudo usermod -a -G mediacenter radarr")
@@ -59,7 +59,7 @@ class UserGroupSetup:
             " ; sudo chown $(id -u):mediacenter " + self.root_dir + "/data"
             " ; sudo chown $(id -u):mediacenter "
             + self.root_dir
-            + '/data/{media,torrents,usenet/complete}"'
+            + '/data/{media,torrents,usenet}"'
         )
         self.create_config_dir("lidarr")
         os.system("sudo usermod -a -G mediacenter lidarr")
@@ -76,7 +76,7 @@ class UserGroupSetup:
             " ; sudo chown $(id -u):mediacenter " + self.root_dir + "/data"
             " ; sudo chown $(id -u):mediacenter "
             + self.root_dir
-            + '/data/{media,torrents,usenet/complete}"'
+            + '/data/{media,torrents,usenet}"'
         )
         self.create_config_dir("readarr")
         os.system("sudo usermod -a -G mediacenter readarr")
@@ -98,7 +98,7 @@ class UserGroupSetup:
             " ; sudo chown $(id -u):mediacenter " + self.root_dir + "/data"
             " ; sudo chown $(id -u):mediacenter "
             + self.root_dir
-            + '/data/{media,torrents,usenet/complete}"'
+            + '/data/{media,torrents,usenet}"'
         )
         self.create_config_dir("mylar")
         os.system("sudo usermod -a -G mediacenter mylar")
@@ -115,7 +115,7 @@ class UserGroupSetup:
             " ; sudo chown $(id -u):mediacenter " + self.root_dir + "/data"
             " ; sudo chown $(id -u):mediacenter "
             + self.root_dir
-            + '/data/{media,torrents,usenet/complete}"'
+            + '/data/{media,torrents,usenet}"'
         )
         self.create_config_dir("audiobookshelf")
         os.system("sudo usermod -a -G mediacenter audiobookshelf")
@@ -130,8 +130,17 @@ class UserGroupSetup:
         os.system("sudo usermod -a -G mediacenter qbittorrent")
 
     def sabnzbd(self):
-        os.system("sudo useradd sabnzbd -u 13011")
+        os.system(
+            '/bin/bash -c "sudo useradd sabnzbd -u 13011'
+            " ; sudo mkdir -pv " + self.root_dir + "/data/usenet/incomplete -m 775"
+            " ; sudo chown -R sabnzbd:mediacenter "
+            + self.root_dir
+            + "/data/usenet/{complete,incomplete}"
+            " ; sudo chown $(id -u):mediacenter " + self.root_dir + "/data"
+            " ; sudo chown $(id -u):mediacenter " + self.root_dir + '/data/usenet"'
+        )
         os.system("sudo usermod -a -G mediacenter sabnzbd")
+        self.create_config_dir("sabnzbd")
 
     def overseerr(self):
         os.system("sudo useradd overseerr -u 13009")
