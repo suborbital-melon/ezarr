@@ -5,6 +5,7 @@ class UserGroupSetup:
     def __init__(self, root_dir="/"):
         self.root_dir = root_dir
         os.system("sudo groupadd mediacenter -g 13000")
+        os.system("export UID=$(id -u)")
 
     def create_config_dir(self, service_name):
         os.system(
@@ -153,11 +154,4 @@ class UserGroupSetup:
         os.system("sudo usermod -a -G mediacenter jellyseerr")
 
     def jellyfin(self):
-        os.system(
-            '/bin/bash -c "sudo useradd jellyfin -u 1000'
-            " ; sudo chown -R jellyfin:mediacenter "
-            + self.root_dir
-            + "/data/media/{movies,tv,books,music}"
-        )
-        self.create_config_dir("jellyfin")
-        os.system("sudo usermod -a -G mediacenter jellyfin")
+        os.system(f"sudo mkdir -p {self.root_dir}/docker/jellyfin-config")
