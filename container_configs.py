@@ -285,3 +285,16 @@ class ContainerConfig:
             '      - "5055:5055"\n'
             "    restart: unless-stopped\n\n"
         )
+
+    def homepage(self):
+        return (
+            "  homepage:\n"
+            "    image: ghcr.io/benphelps/homepage:latest\n"
+            "    container_name: homepage\n"
+            "    volumes:\n"
+            "      - " + self.config_dir + "/homepage-config:/app/config\n"
+            "      - /var/run/docker.sock:/var/run/docker.sock:ro\n"
+            "    ports:\n"
+            '      - "3000:3000"\n'
+            "    restart: unless-stopped\n\n"
+        )

@@ -107,6 +107,11 @@ def main():
     if len(services_classed["usenet"]) == 0:
         print("Warning: no Usenet clients selected.")
 
+    print("\n===Dashboard===")
+    services_classed["dashboard"] = []
+    print("Use Homepage? [Y/n]", end=" ")
+    take_input("homepage", "dashboard")
+
     services = []
     for service_class in services_classed.keys():
         services.extend(services_classed[service_class])
