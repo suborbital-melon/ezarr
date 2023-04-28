@@ -10,8 +10,8 @@ class UserGroupSetup:
     def create_config_dir(self, service_name):
         os.system(
             f"sudo mkdir -p {self.root_dir}/docker/{service_name}-config"
-            f" ; sudo chown -R {service_name}:mediacenter {self.root_dir}/docker/{service_name}-config"
-            f" ; sudo chown $(id -u):mediacenter {self.root_dir}/docker"
+            f" ; sudo chown -vR {service_name}:mediacenter {self.root_dir}/docker/{service_name}-config"
+            f" ; sudo chown -v $(id -u):mediacenter {self.root_dir}/docker"
         )
 
     def sonarr(self):
@@ -20,11 +20,11 @@ class UserGroupSetup:
             " ; sudo mkdir -pv "
             + self.root_dir
             + "/data/{media,torrents,usenet/complete}/tv -m 775"
-            " ; sudo chown -R sonarr:mediacenter "
+            " ; sudo chown -vR sonarr:mediacenter "
             + self.root_dir
             + "/data/{media,torrents,usenet/complete}/tv"
-            " ; sudo chown $(id -u):mediacenter " + self.root_dir + "/data"
-            " ; sudo chown $(id -u):mediacenter "
+            " ; sudo chown -v $(id -u):mediacenter " + self.root_dir + "/data"
+            " ; sudo chown -v $(id -u):mediacenter "
             + self.root_dir
             + '/data/{media,torrents,usenet}"'
         )
@@ -37,11 +37,11 @@ class UserGroupSetup:
             " ; sudo mkdir -pv "
             + self.root_dir
             + "/data/{media,torrents,usenet/complete}/movies -m 775"
-            " ; sudo chown -R radarr:mediacenter "
+            " ; sudo chown -vR radarr:mediacenter "
             + self.root_dir
             + "/data/{media,torrents,usenet/complete}/movies"
-            " ; sudo chown $(id -u):mediacenter " + self.root_dir + "/data"
-            " ; sudo chown $(id -u):mediacenter "
+            " ; sudo chown -v $(id -u):mediacenter " + self.root_dir + "/data"
+            " ; sudo chown -v $(id -u):mediacenter "
             + self.root_dir
             + '/data/{media,torrents,usenet}"'
         )
@@ -54,11 +54,11 @@ class UserGroupSetup:
             " ; sudo mkdir -pv "
             + self.root_dir
             + "/data/{media,torrents,usenet/complete}/music -m 775"
-            " ; sudo chown -R lidarr:mediacenter "
+            " ; sudo chown -vR lidarr:mediacenter "
             + self.root_dir
             + "/data/{media,torrents,usenet/complete}/music"
-            " ; sudo chown $(id -u):mediacenter " + self.root_dir + "/data"
-            " ; sudo chown $(id -u):mediacenter "
+            " ; sudo chown -v $(id -u):mediacenter " + self.root_dir + "/data"
+            " ; sudo chown -v $(id -u):mediacenter "
             + self.root_dir
             + '/data/{media,torrents,usenet}"'
         )
@@ -71,11 +71,11 @@ class UserGroupSetup:
             " ; sudo mkdir -pv "
             + self.root_dir
             + "/data/{media,torrents,usenet/complete}/books -m 775"
-            " ; sudo chown -R readarr:mediacenter "
+            " ; sudo chown -vR readarr:mediacenter "
             + self.root_dir
             + "/data/{media,torrents,usenet/complete}/books"
-            " ; sudo chown $(id -u):mediacenter " + self.root_dir + "/data"
-            " ; sudo chown $(id -u):mediacenter "
+            " ; sudo chown -v $(id -u):mediacenter " + self.root_dir + "/data"
+            " ; sudo chown -v $(id -u):mediacenter "
             + self.root_dir
             + '/data/{media,torrents,usenet}"'
         )
@@ -93,11 +93,11 @@ class UserGroupSetup:
             " ; sudo mkdir -pv "
             + self.root_dir
             + "/data/{media,torrents,usenet/complete}/comics -m 775"
-            " ; sudo chown -R mylar:mediacenter "
+            " ; sudo chown -vR mylar:mediacenter "
             + self.root_dir
             + "/data/{media,torrents,usenet/complete}/comics"
-            " ; sudo chown $(id -u):mediacenter " + self.root_dir + "/data"
-            " ; sudo chown $(id -u):mediacenter "
+            " ; sudo chown -v $(id -u):mediacenter " + self.root_dir + "/data"
+            " ; sudo chown -v $(id -u):mediacenter "
             + self.root_dir
             + '/data/{media,torrents,usenet}"'
         )
@@ -110,11 +110,11 @@ class UserGroupSetup:
             " ; sudo mkdir -pv "
             + self.root_dir
             + "/data/{media,torrents,usenet/complete}/audiobooks -m 775"
-            " ; sudo chown -R audiobookshelf:mediacenter "
+            " ; sudo chown -vR audiobookshelf:mediacenter "
             + self.root_dir
             + "/data/{media,torrents,usenet/complete}/audiobooks"
-            " ; sudo chown $(id -u):mediacenter " + self.root_dir + "/data"
-            " ; sudo chown $(id -u):mediacenter "
+            " ; sudo chown -v $(id -u):mediacenter " + self.root_dir + "/data"
+            " ; sudo chown -v $(id -u):mediacenter "
             + self.root_dir
             + '/data/{media,torrents,usenet}"'
         )
@@ -134,7 +134,7 @@ class UserGroupSetup:
         os.system(
             '/bin/bash -c "sudo useradd sabnzbd -u 13011'
             f" ; sudo mkdir -pv {self.root_dir}/data/usenet/incomplete -m 775"
-            " ; sudo chown -R sabnzbd:mediacenter"
+            " ; sudo chown -vR sabnzbd:mediacenter"
             f"{self.root_dir}/data/usenet/incomplete"
         )
         os.system("sudo usermod -a -G mediacenter sabnzbd")
