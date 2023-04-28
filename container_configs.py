@@ -245,7 +245,7 @@ class ContainerConfig:
             "      - TZ=" + self.timezone + "\n"
             "    volumes:\n"
             "      - " + self.config_dir + "/sabnzbd-config:/config\n"
-            "      - " + self.root_dir + ":/data\n"
+            "      - " + self.usenet_dir + "/data:/data/usenet\n"
             "    ports:\n"
             '      - "8080:8080"\n'
             '      - "9090:9090"\n'

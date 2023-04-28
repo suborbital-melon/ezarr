@@ -133,12 +133,9 @@ class UserGroupSetup:
     def sabnzbd(self):
         os.system(
             '/bin/bash -c "sudo useradd sabnzbd -u 13011'
-            " ; sudo mkdir -pv " + self.root_dir + "/data/usenet/incomplete -m 775"
-            " ; sudo chown -R sabnzbd:mediacenter "
-            + self.root_dir
-            + "/data/usenet/{complete,incomplete}"
-            " ; sudo chown $(id -u):mediacenter " + self.root_dir + "/data"
-            " ; sudo chown $(id -u):mediacenter " + self.root_dir + '/data/usenet"'
+            f" ; sudo mkdir -pv {self.root_dir}/data/usenet/incomplete -m 775"
+            " ; sudo chown -R sabnzbd:mediacenter"
+            f"{self.root_dir}/data/usenet/incomplete"
         )
         os.system("sudo usermod -a -G mediacenter sabnzbd")
         self.create_config_dir("sabnzbd")
