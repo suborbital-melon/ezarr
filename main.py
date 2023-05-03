@@ -32,7 +32,8 @@ def take_directory_input():
                 return ans[:-1]
             return ans
         print(
-            'Please make sure the path is absolute, meaning it starts at the root of your filesystem and starts with "/":',
+            "Please make sure the path is absolute, meaning it starts at the root"
+            ' of your filesystem and starts with "/":',
             end=" ",
         )
 
