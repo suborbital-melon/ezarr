@@ -6,7 +6,6 @@ class UserGroupSetup:
         self.root_dir = root_dir
         self.config_dir = config_dir
         os.system("sudo groupadd mediacenter -g 13000")
-        os.system("export UID=$(id -u)")
 
     def create_config_dir(self, service_name):
         os.system(

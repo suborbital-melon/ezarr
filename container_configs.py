@@ -1,3 +1,6 @@
+import os
+
+
 class ContainerConfig:
     def __init__(
         self,
@@ -25,7 +28,7 @@ class ContainerConfig:
             "    container_name: plex\n"
             "    network_mode: host\n"
             "    environment:\n"
-            "      - PUID=${UID}\n"
+            f"      - PUID={os.getuid()}\n"
             "      - PGID=13000\n"
             "      - VERSION=docker\n"
             "      - PLEX_CLAIM=" + self.plex_claim + "\n"
@@ -43,7 +46,7 @@ class ContainerConfig:
             "    depends_on:\n"
             "      - plex\n"
             "    environment:\n"
-            "      - PUID=${UID}\n"
+            f"      - PUID={os.getuid()}\n"
             "      - PGID=13000\n"
             "      - TZ=" + self.timezone + "\n"
             "    volumes:\n"
@@ -59,7 +62,7 @@ class ContainerConfig:
             "    image: lscr.io/linuxserver/jellyfin:latest\n"
             "    container_name: jellyfin\n"
             "    environment:\n"
-            "      - PUID=1000\n"
+            f"      - PUID={os.getuid()}\n"
             "      - PGID=13000\n"
             "      - UMASK=002\n"
             "      - TZ=" + self.timezone + "\n"
