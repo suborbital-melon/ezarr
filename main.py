@@ -139,21 +139,20 @@ def main():
     print("Where would you like to keep your docker configs?", end=" ")
     config_dir = take_directory_input()
 
-    compose = open("docker-compose.yml", "w")
-    compose.write("---\n" 'version: "3.2"\n' "services:\n")
+    with open("docker-compose.yml", "w") as compose:
+        compose.write("---\n" 'version: "3.2"\n' "services:\n")
 
-    container_config = ContainerConfig(
-        root_dir, config_dir, timezone, plex_claim=plex_claim
-    )
-    permission_setup = UserGroupSetup(root_dir=root_dir, config_dir=config_dir)
+        container_config = ContainerConfig(
+            root_dir, config_dir, timezone, plex_claim=plex_claim
+        )
+        permission_setup = UserGroupSetup(root_dir=root_dir, config_dir=config_dir)
 
-    for service in services:
-        try:
-            getattr(permission_setup, service)()
-        except AttributeError:
-            pass
-        compose.write(getattr(container_config, service)())
-    compose.close()
+        for service in services:
+            try:
+                getattr(permission_setup, service)()
+            except AttributeError:
+                pass
+            compose.write(getattr(container_config, service)())
 
     print(
         'Process complete. You can now run "docker compose up -d" to start your containers.'
