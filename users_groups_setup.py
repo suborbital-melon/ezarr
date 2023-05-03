@@ -2,16 +2,17 @@ import os
 
 
 class UserGroupSetup:
-    def __init__(self, root_dir="/"):
+    def __init__(self, root_dir="/", config_dir="/"):
         self.root_dir = root_dir
+        self.config_dir = config_dir
         os.system("sudo groupadd mediacenter -g 13000")
         os.system("export UID=$(id -u)")
 
     def create_config_dir(self, service_name):
         os.system(
-            f"sudo mkdir -p {self.root_dir}/docker/{service_name}-config"
-            f" ; sudo chown -vR {service_name}:mediacenter {self.root_dir}/docker/{service_name}-config"
-            f" ; sudo chown -v $(id -u):mediacenter {self.root_dir}/docker"
+            f"sudo mkdir -p {self.config_dir}/{service_name}-config"
+            f" ; sudo chown -vR {service_name}:mediacenter {self.config_dir}/{service_name}-config"
+            f" ; sudo chown -v $(id -u):mediacenter {self.config_dir}"
         )
 
     def sonarr(self):
@@ -135,7 +136,7 @@ class UserGroupSetup:
             '/bin/bash -c "sudo useradd sabnzbd -u 13011'
             f" ; sudo mkdir -pv {self.root_dir}/data/usenet/incomplete -m 775"
             " ; sudo chown -vR sabnzbd:mediacenter"
-            f"{self.root_dir}/data/usenet/incomplete"
+            f' {self.root_dir}/data/usenet/incomplete"'
         )
         os.system("sudo usermod -a -G mediacenter sabnzbd")
         self.create_config_dir("sabnzbd")
@@ -151,4 +152,4 @@ class UserGroupSetup:
         os.system("sudo usermod -a -G mediacenter jellyseerr")
 
     def jellyfin(self):
-        os.system(f"sudo mkdir -p {self.root_dir}/docker/jellyfin-config")
+        os.system(f"sudo mkdir -p {self.config_dir}/jellyfin-config")

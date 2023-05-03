@@ -2,12 +2,13 @@ class ContainerConfig:
     def __init__(
         self,
         root_dir,
+        config_dir,
         timezone,
         plex_claim="",
     ):
         self.root_dir = root_dir
+        self.config_dir = config_dir
         self.timezone = timezone
-        self.config_dir = root_dir + "/config"
         self.plex_claim = plex_claim
         self.movie_dir = root_dir + "/media/movies"
         self.tv_dir = root_dir + "/media/tv"
@@ -58,7 +59,7 @@ class ContainerConfig:
             "    image: lscr.io/linuxserver/jellyfin:latest\n"
             "    container_name: jellyfin\n"
             "    environment:\n"
-            "      - PUID=$1000\n"
+            "      - PUID=1000\n"
             "      - PGID=13000\n"
             "      - UMASK=002\n"
             "      - TZ=" + self.timezone + "\n"
