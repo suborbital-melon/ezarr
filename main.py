@@ -55,6 +55,9 @@ def main():
     take_input("lidarr", "servarr")
     print("Use Readarr? [Y/n]", end=" ")
     take_input("readarr", "servarr")
+    if services_classed["servarr"].__contains__("readarr"):
+        print("Use Calibre? [Y/n]", end=" ")
+        take_input("calibre", "servarr")
     print("Use Mylar3? [Y/n]", end=" ")
     take_input("mylar3", "servarr")
     print("Use Audiobookshelf? [Y/n]", end=" ")

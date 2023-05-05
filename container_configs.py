@@ -13,11 +13,11 @@ class ContainerConfig:
         self.config_dir = config_dir
         self.timezone = timezone
         self.plex_claim = plex_claim
-        self.movie_dir = root_dir + "/media/movies"
-        self.tv_dir = root_dir + "/media/tv"
-        self.music_dir = root_dir + "/media/music"
-        self.book_dir = root_dir + "/media/books"
-        self.comic_dir = root_dir + "/media/comics"
+        self.movie_dir = root_dir + "/data/media/movies"
+        self.tv_dir = root_dir + "/data/media/tv"
+        self.music_dir = root_dir + "/data/media/music"
+        self.book_dir = root_dir + "/data/media/books"
+        self.comic_dir = root_dir + "/data/media/comics"
         self.torrent_dir = root_dir + "/data/torrents"
         self.usenet_dir = root_dir + "/data/usenet"
 
@@ -143,6 +143,25 @@ class ContainerConfig:
             "      - " + self.root_dir + "/data:/data\n"
             "    ports:\n"
             '      - "8787:8787"\n'
+            "    restart: unless-stopped\n\n"
+        )
+
+    def calibre(self):
+        return (
+            "  calibre:\n"
+            "    image: lscr.io/linuxserver/calibre:latest\n"
+            "    container_name: calibre\n"
+            "    environment:\n"
+            "      - PUID=13012\n"
+            "      - PGID=13000\n"
+            "      - TZ=" + self.timezone + "\n"
+            "    volumes:\n"
+            "      - " + self.config_dir + "/calibre-config:/config\n"
+            "      - " + self.root_dir + "/data:/books\n"
+            "    ports:\n"
+            '      - "8180:8080"\n'
+            '      - "8181:8181"\n'
+            '      - "8081:8081"\n'
             "    restart: unless-stopped\n\n"
         )
 

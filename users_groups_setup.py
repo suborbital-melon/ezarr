@@ -82,6 +82,11 @@ class UserGroupSetup:
         self.create_config_dir("readarr")
         os.system("sudo usermod -a -G mediacenter readarr")
 
+    def calibre(self):
+        os.system("sudo useradd calibre -u 13013")
+        self.create_config_dir("calibre")
+        os.system("sudo usermod -a -G mediacenter calibre")
+
     def bazarr(self):
         os.system("sudo useradd bazarr -u 13012")
         self.create_config_dir("bazarr")
@@ -152,3 +157,4 @@ class UserGroupSetup:
 
     def jellyfin(self):
         os.system(f"sudo mkdir -p {self.config_dir}/jellyfin-config")
+        os.system(f"sudo chown -vR {self.config_dir}/jellyfin-config")
