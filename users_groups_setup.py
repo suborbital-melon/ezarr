@@ -139,8 +139,9 @@ class UserGroupSetup:
         os.system(
             '/bin/bash -c "sudo useradd sabnzbd -u 13011'
             f" ; sudo mkdir -pv {self.root_dir}/data/usenet/incomplete -m 775"
-            " ; sudo chown -vR sabnzbd:mediacenter"
-            f' {self.root_dir}/data/usenet/incomplete"'
+            " ; sudo chown -v sabnzbd:mediacenter"
+            + {self.root_dir}
+            + '/data/usenet/{complete,incomplete}"'
         )
         os.system("sudo usermod -a -G mediacenter sabnzbd")
         self.create_config_dir("sabnzbd")
@@ -157,4 +158,4 @@ class UserGroupSetup:
 
     def jellyfin(self):
         os.system(f"sudo mkdir -p {self.config_dir}/jellyfin-config")
-        os.system(f"sudo chown -vR {self.config_dir}/jellyfin-config")
+        os.system(f"sudo chown :mediacenter -vR {self.config_dir}/jellyfin-config")
