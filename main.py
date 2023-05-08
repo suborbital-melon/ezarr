@@ -142,7 +142,7 @@ def main():
     config_dir = "~/docker-configs"
 
     with open("docker-compose.yml", "w") as compose:
-        compose.write("---\n" 'version: "3.2"\n' "services:\n")
+        compose.write("---\n" 'version: "3.8"\n' "services:\n")
 
         container_config = ContainerConfig(
             root_dir, config_dir, timezone, plex_claim=plex_claim
