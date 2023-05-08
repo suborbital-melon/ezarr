@@ -140,7 +140,7 @@ class UserGroupSetup:
             '/bin/bash -c "sudo useradd sabnzbd -u 13011'
             f" ; sudo mkdir -pv {self.root_dir}/data/usenet/incomplete -m 775"
             " ; sudo chown -v sabnzbd:mediacenter"
-            + {self.root_dir}
+            + self.root_dir
             + '/data/usenet/{complete,incomplete}"'
         )
         os.system("sudo usermod -a -G mediacenter sabnzbd")
