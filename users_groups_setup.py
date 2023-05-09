@@ -158,4 +158,4 @@ class UserGroupSetup:
 
     def jellyfin(self):
         os.system(f"sudo mkdir -p {self.config_dir}/jellyfin-config")
-        os.system(f"sudo chown :mediacenter -R {self.config_dir}/jellyfin-config")
+        os.system(f"sudo chown $USER:mediacenter -R {self.config_dir}/jellyfin-config")
