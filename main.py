@@ -139,7 +139,7 @@ def main():
     print("Where would you like to keep your files?", end=" ")
     root_dir = take_directory_input()
 
-    config_dir = "/docker-configs"
+    config_dir = "~/docker-configs"
 
     with open("docker-compose.yml", "w") as compose:
         compose.write("---\n" 'version: "3.8"\n' "services:\n")
